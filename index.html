@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BizBize Ailesi</title>
+<link rel="icon" type="image/jpeg" href="logo.jpg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--ink:#f6ecd0;--muted:#b9a97c;--accent:#e8b230;--line:rgba(232,178,48,.28);--card:rgba(14,12,8,.74);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6;
+background:linear-gradient(rgba(9,9,11,.72),rgba(9,9,11,.72)),url(logo.jpg) center center/contain no-repeat fixed,#09090b}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.page{display:grid;grid-template-columns:300px minmax(0,1fr) 300px;gap:24px;max-width:1500px;margin:0 auto;padding:20px;min-height:100vh;align-items:end}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.center{display:flex;flex-direction:column;gap:20px;align-self:start;max-width:820px;width:100%;margin:0 auto}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.tabs button{padding:14px 8px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--muted);font:inherit;font-weight:700;cursor:pointer}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#14100a}
+.panel{display:none;text-align:center}
+.panel.on{display:block}
+.panel p{margin:0 0 16px}
+.perks{list-style:none;margin:0;padding:0;display:grid;gap:10px;text-align:left}
+.perks li{padding:12px 16px;border-left:4px solid var(--accent);background:rgba(255,255,255,.05);border-radius:0 12px 12px 0}
+.perks b{display:block}
+.perks span{color:var(--muted)}
+.car{position:relative}
+.track{display:flex;overflow:hidden;border-radius:14px;border:1px solid var(--line)}
+.slide{flex:0 0 100%;aspect-ratio:16/8;display:grid;place-items:center;padding:16px;font-weight:700}
+.s0{background:linear-gradient(135deg,#2b2108,#6b4b0c)}.s1{background:linear-gradient(135deg,#101826,#4a3a12)}
+.s2{background:linear-gradient(135deg,#3a1a0c,#171717)}.s3{background:linear-gradient(135deg,#1c1c1c,#7a5a10)}
+.slide span{background:rgba(0,0,0,.6);padding:8px 14px;border-radius:8px}
+.car button{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:var(--accent);color:#14100a;font-size:1.4rem;cursor:pointer}
+#prev{left:10px}#next{right:10px}
+.title{text-align:center}
+.title img{width:140px;height:140px;border-radius:50%}
+.title h1{margin:6px 0 0;font-size:2.2rem}
+.title p{margin:0 0 18px;color:var(--muted)}
+.soc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.soc a{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.05);text-decoration:none;font-weight:700}
+.soc a:hover{border-color:var(--accent)}
+.soc i{font-style:normal;font-size:2.1rem;line-height:1}
+.leaders h2,.servers>h2{margin:0 0 14px;text-align:center;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase}
+.leader{display:flex;align-items:center;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.leader:first-of-type{border-top:0}
+.av{display:grid;place-items:center;width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.07);font-size:1.4rem;font-weight:800;color:var(--accent)}
+.leader strong{letter-spacing:.05em}
+.servers{position:relative}
+.servers.hide{display:none}
+.x{position:absolute;top:14px;right:16px;background:none;border:0;color:var(--muted);font-size:1.1rem;cursor:pointer}
+.list{max-height:420px;overflow-y:auto;padding-right:6px}
+.grp{display:flex;align-items:center;gap:8px;margin:12px 0 8px;font-size:.8rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.dot{width:10px;height:10px;border-radius:50%}
+.g{color:#3ddc84}.g .dot{background:#3ddc84}.y{color:#ffc933}.y .dot{background:#ffc933}
+.srv{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.srv .av{width:56px;height:56px;flex:none}
+.srv b{display:block;font-size:.95rem}
+.badge{display:inline-block;margin-top:2px;padding:0 10px;border-radius:999px;font-size:.72rem;font-weight:800}
+.bg{background:rgba(61,220,132,.18);color:#3ddc84;border:1px solid #3ddc84}
+.by{background:rgba(255,201,51,.15);color:#ffc933;border:1px solid #ffc933}
+.reopen{display:none;position:fixed;right:16px;bottom:16px;padding:10px 18px;border-radius:999px;border:0;background:var(--accent);color:#14100a;font:inherit;font-weight:700;cursor:pointer}
+.reopen.on{display:block}
+@media (max-width:1100px){
+.page{grid-template-columns:1fr;align-items:start}
+.center{order:1}.leaders{order:2}.servers{order:3}
+}
+@media (max-width:560px){.soc{grid-template-columns:repeat(2,1fr)}.tabs button{font-size:.8rem}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<aside class="card leaders">
+<h2>Lonca Liderleri</h2>
+<div class="leader"><div class="av">A</div><strong>AVTUTAR</strong></div>
+<div class="leader"><div class="av">T</div><strong>TOMA</strong></div>
+</aside>
+
+<main class="center">
+<section class="card">
+<div class="tabs" role="tablist">
+<button role="tab" data-t="galeri" aria-selected="false">Galeri</button>
+<button role="tab" data-t="hakkimizda" aria-selected="true">Hakkımızda</button>
+<button role="tab" data-t="ayricaliklar" aria-selected="false">Lonca Ayrıcalıkları</button>
+</div>
+
+<div class="panel" id="galeri">
+<div class="car">
+<div class="track" id="track">
+<div class="slide s0"><span>Görsel 1: buraya kendi fotoğrafını ekle</span></div>
+<div class="slide s1"><span>Görsel 2: lonca etkinliği</span></div>
+<div class="slide s2"><span>Görsel 3: savaş anı</span></div>
+<div class="slide s3"><span>Görsel 4: grup fotoğrafı</span></div>
+</div>
+<button id="prev" aria-label="Önceki">‹</button><button id="next" aria-label="Sonraki">›</button>
+</div>
+</div>
+
+<div class="panel on" id="hakkimizda">
+<p>BizBize Ailesi, oyunu eğlenceyle ve saygıyla oynamak isteyen oyuncuların bir araya geldiği bir loncadır.</p>
+<p>Yeni gelenlere yardım eder, birlikte etkinlik düzenler ve her gün sesli sohbette buluşuruz.</p>
+<p>Burada yazacağınız kendi lonca hikâyenizi, hangi sunucularda oynadığınızı ve hedeflerinizi ekleyin.</p>
+</div>
+
+<div class="panel" id="ayricaliklar">
+<ul class="perks">
+<li><b>Özel etkinlikler</b><span>Sadece lonca üyelerine açık turnuvalar ve çekilişler.</span></li>
+<li><b>Üye rolü</b><span>Sunucularda özel rol ve sohbet odaları.</span></li>
+<li><b>Destek</b><span>Yeni başlayanlara rehberlik ve eşya yardımı.</span></li>
+<li><b>Öncelik</b><span>Duyurulara ve yeni sunuculara ilk erişim.</span></li>
+</ul>
+</div>
+</section>
+
+<section class="card title">
+<img src="logo.jpg" alt="BizBize Loncası logosu">
+<h1>BizBize Ailesi</h1>
+<p>Sosyal Medya Hesaplarımız</p>
+<div class="soc">
+<a href="#"><i class="fa-brands fa-whatsapp" style="color:#25d366"></i>WhatsApp</a>
+<a href="#"><i class="fa-brands fa-instagram" style="color:#e1306c"></i>Instagram</a>
+<a href="#"><i class="fa-brands fa-discord" style="color:#5865f2"></i>Discord</a>
+<a href="#"><i class="fa-brands fa-facebook-f" style="color:#1877f2"></i>Facebook</a>
+</div>
+</section>
+</main>
+
+<aside class="card servers" id="servers">
+<button class="x" id="close" aria-label="Kapat">✕</button>
+<h2>Aktif Sunucular</h2>
+<div class="list">
+<div class="grp g"><span class="dot"></span>Aktif Sunucular</div>
+<div class="srv"><div class="av">X</div><div><b>X</b><span class="badge bg">AKTİF</span></div></div>
+<div class="grp y"><span class="dot"></span>Gelecek Sunucular</div>
+<div class="srv"><div class="av">X</div><div><b>X</b><span class="badge by">GELECEK</span></div></div>
+<div class="srv"><div class="av">X</div><div><b>X</b><span class="badge by">GELECEK</span></div></div>
+<div class="srv"><div class="av">X</div><div><b>X</b><span class="badge by">GELECEK</span></div></div>
+</div>
+</aside>
+
+</div>
+<button class="reopen" id="reopen">Aktif Sunucular</button>
+
+<script>
+(function(){
+var tabs=document.querySelectorAll('.tabs button'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(b){b.onclick=function(){
+tabs.forEach(function(x){x.setAttribute('aria-selected',x===b)});
+panels.forEach(function(p){p.classList.toggle('on',p.id===b.dataset.t)});
+if(b.dataset.t==='galeri')go(i);
+}});
+var t=document.getElementById('track'),n=t.children.length,i=0;
+function go(k){i=(k+n)%n;t.scrollTo({left:t.clientWidth*i})}
+document.getElementById('prev').onclick=function(){go(i-1)};
+document.getElementById('next').onclick=function(){go(i+1)};
+var s=document.getElementById('servers'),r=document.getElementById('reopen');
+document.getElementById('close').onclick=function(){s.classList.add('hide');r.classList.add('on')};
+r.onclick=function(){s.classList.remove('hide');r.classList.remove('on')};
+})();
+</script>
+</body>
+</html>
